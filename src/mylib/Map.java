@@ -1,11 +1,4 @@
-package mylib;// Java program to demonstrate implementation of our
-// own hash table with chaining for collision detection
-import java.util.Objects;
-
-// A node of chains
-
-
-// Class to represent entire hash table
+package mylib;
 public class Map<K, V> {
     class HashNode<K, V> {
         K key;
@@ -49,8 +42,8 @@ public class Map<K, V> {
     public int size() { return size; }
     public boolean isEmpty() { return size() == 0; }
 
-    private final int hashCode (K key) {
-        return Objects.hashCode(key);
+    public static int hashCode(Object o) {
+        return o != null ? o.hashCode() : 0;
     }
 
     // This implements hash function to find index
