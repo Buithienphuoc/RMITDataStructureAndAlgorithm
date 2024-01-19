@@ -1,7 +1,5 @@
 package mylib;
 
-import java.util.Arrays;
-
 public class MyArrayList<E> {
 
     private E[] elements;
@@ -24,9 +22,9 @@ public class MyArrayList<E> {
      */
     public void add(E element) {
         if (size == elements.length) {
-            resizeArray();
+            elements =resizeArray(elements, elements.length*2); // Worst case: O(n)
         }
-        elements[size++] = element;
+        elements[size++] = element; // Best case: O(1)
     }
 
     /**
@@ -69,10 +67,15 @@ public class MyArrayList<E> {
         return size == 0;
     }
 
-    private void resizeArray() {
-        elements = Arrays.copyOf(elements, 2 * elements.length);
-    }
+    public E[] resizeArray(E[] oldArray, int newLength) {
+        E[] newArray = (E[]) new Object[newLength];  // O(1)
+        int copyLength = Math.min(oldArray.length, newLength); // O(1)
 
+        // Copy elements from the old array to the new array
+        System.arraycopy(oldArray, 0, newArray, 0, copyLength); // Complexity: O(n)
+
+        return newArray;
+    }
     /**
      * Complexity O(n)
      *
@@ -104,5 +107,9 @@ public class MyArrayList<E> {
         return "MyArrayList{" +
                 result +
                 '}';
+    }
+
+    public void set(int bucketIndex, E newNode) {
+        elements[bucketIndex] = newNode;
     }
 }
