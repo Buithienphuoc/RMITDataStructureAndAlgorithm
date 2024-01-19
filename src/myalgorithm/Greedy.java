@@ -2,6 +2,8 @@ package myalgorithm;
 
 import mylib.MyArrayList;
 
+import java.util.Arrays;
+
 public class Greedy {
     /**
      * Prim 's algorithm
@@ -133,8 +135,19 @@ public class Greedy {
         static void printSolution(int[] dist) {
             System.out.println(
                     "Vertex \t\t Distance from Source");
-            for (int vertex = 0; vertex < numberOfVertices; vertex++)
+            for (int vertex = 0; vertex < numberOfVertices; vertex++) {
                 System.out.println(vertex + " \t\t " + dist[vertex]);
+            }
+        }
+
+        static void printPath(Boolean[] isVertexPassedArray) {
+            for (int i = 0; i <isVertexPassedArray.length ; i++) {
+                if(isVertexPassedArray[i]){
+                    System.out.print(i+"->");
+                }
+            }
+                System.out.println(Arrays.toString(isVertexPassedArray));
+
         }
 
         // Function that implements Dijkstra's single source
@@ -146,16 +159,15 @@ public class Greedy {
             // dist[i] will hold
             // the shortest distance from src to i
 
-            // sptSet[i] will true if vertex i is included in
+            // isVertexPassedArray[i] will true if vertex i is included in
             // the shortest path tree or shortest distance from src
             // to i is finalized
-            Boolean[] sptSet = new Boolean[numberOfVertices];
-
+            Boolean[] isVertexPassedArray = new Boolean[numberOfVertices];
             // Initialize all distances as INFINITE and stpSet[]
             // as false
             for (int vertex = 0; vertex < numberOfVertices; vertex++) {
                 dist[vertex] = Integer.MAX_VALUE;
-                sptSet[vertex] = false;
+                isVertexPassedArray[vertex] = false;
             }
 
             // Distance of source vertex from itself is always 0
@@ -166,20 +178,20 @@ public class Greedy {
                 // Pick the minimum distance vertex from the set
                 // of vertices not yet processed. u is always
                 // equal to src in first iteration.
-                int u = minDistance(dist, sptSet);
-
+                int u = minDistance(dist, isVertexPassedArray);
+                printPath(isVertexPassedArray);
                 // Mark the picked vertex as processed
-                sptSet[u] = true;
+                isVertexPassedArray[u] = true;
 
                 // Update dist value of the adjacent vertices of
                 // the picked vertex.
                 for (int vertex = 0; vertex < numberOfVertices; vertex++)
 
-                    // Update dist[vertex] only if is not in sptSet,
+                    // Update dist[vertex] only if is not in isVertexPassedArray,
                     // there is an edge from u to vertex, and total
                     // weight of path from src to vertex through u is
                     // smaller than current value of dist[vertex]
-                    if (!sptSet[vertex] && graph[u][vertex] != 0
+                    if (!isVertexPassedArray[vertex] && graph[u][vertex] != 0
                             && dist[u] != Integer.MAX_VALUE
                             && dist[u] + graph[u][vertex] < dist[vertex])
                         dist[vertex] = dist[u] + graph[u][vertex];

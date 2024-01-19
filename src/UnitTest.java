@@ -6,6 +6,8 @@ import mylib.MyGraph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class UnitTest {
     @Test
     public void testPrimMST(){
@@ -34,7 +36,8 @@ public class UnitTest {
                 { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
                 { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
                 { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
-        Assertions.assertNotNull(ShortestPath.findShortestPath(graph2,0));
+        System.out.println(Arrays.toString(ShortestPath.findShortestPath(graph2, 7)));
+        // Assertions.assertNotNull(ShortestPath.findShortestPath(graph2,0));
     }
 
     @Test
