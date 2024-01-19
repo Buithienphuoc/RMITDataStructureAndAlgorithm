@@ -24,9 +24,9 @@ public class MyArrayList<E> {
      */
     public void add(E element) {
         if (size == elements.length) {
-            resizeArray();
+            elements =resizeArray(elements, elements.length*2); // Worst case: O(n)
         }
-        elements[size++] = element;
+        elements[size++] = element; // Best case: O(1)
     }
 
     /**
