@@ -1,8 +1,7 @@
 package problem2pack;
 
-import myalgorithm.DynamicProgramming;
+import myalgorithm.DynamicProgrammingExecutor;
 
-import java.sql.Array;
 import java.util.Arrays;
 
 public class DoraemonCake implements IDoraemonCake{
@@ -29,12 +28,13 @@ public class DoraemonCake implements IDoraemonCake{
 
     @Override
     public double weightByNumber(int X) {
+        Topic[] sortedTopicArray = topicArray;
         // Merge sort:
-        bubbleSortTopicByWeight(topicArray);
+        bubbleSortTopicByWeight(sortedTopicArray);
         // calculate total X largest weight
         double totalX = 0;
         for (int i = 0; i < X; ++i) {
-            totalX += topicArray[i].weight;
+            totalX += sortedTopicArray[i].weight;
         }
         return totalX;
     }
@@ -52,7 +52,9 @@ public class DoraemonCake implements IDoraemonCake{
             weightCanLearn[i] = (int) topicArray[i].weight;
             surface[i] = (int) topicArray[i].surface;
         }
-        return DynamicProgramming.findMaxTotalValueWithLimitedWeightKnapsack((int) area, surface, weightCanLearn, topicArray.length);
+        int result = DynamicProgrammingExecutor.findMaxTotalValueWithLimitedWeightKnapsack((int) area, surface, weightCanLearn, topicArray.length);
+        System.out.println("Result index list:"+ DynamicProgrammingExecutor.getKnapsackResultIndexList());
+        return result;
     }
 
     private void bubbleSortTopicByWeight(Topic[] topicArray){
@@ -64,6 +66,6 @@ public class DoraemonCake implements IDoraemonCake{
                 topicArray[i+1] = temp;
             }
         }
-        System.out.println("Sorted array+" + Arrays.toString(topicArray));
+        System.out.println("Sorted array => " + Arrays.toString(topicArray));
     }
 }
