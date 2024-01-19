@@ -1,7 +1,5 @@
 package mylib;
 
-import java.util.Arrays;
-
 public class MyArrayList<E> {
 
     private E[] elements;
@@ -109,5 +107,9 @@ public class MyArrayList<E> {
         return "MyArrayList{" +
                 result +
                 '}';
+    }
+
+    public void set(int bucketIndex, E newNode) {
+        elements[bucketIndex] = newNode;
     }
 }

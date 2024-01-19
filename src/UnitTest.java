@@ -1,6 +1,6 @@
-import myalgorithm.Greedy;
 import myalgorithm.Greedy.MST;
 import myalgorithm.Greedy.ShortestPath;
+import mylib.Map;
 import mylib.MyArrayList;
 import mylib.MyGraph;
 import org.junit.jupiter.api.Assertions;
@@ -52,5 +52,16 @@ public class UnitTest {
         // Function Call
         System.out.println(g.topologicalSort());
         Assertions.assertNotNull(g);
+    }
+
+    @Test
+    public void testHashTable(){
+        Map<String, Integer> map = new Map<>();
+        map.add("this", 1);
+        map.add("coder", 2);
+        map.add("this", 4);
+        map.add("hi", 5);
+        System.out.println(map.size());
+        System.out.println(map);
     }
 }
